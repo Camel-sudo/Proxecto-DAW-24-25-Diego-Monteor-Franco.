@@ -10,6 +10,9 @@
   - [4- Planificación](#4--planificación)
 
 ## 1- Descripción del proyecto
+
+**La idea es calcada a la de Mauro, salvo que la de el estaba centrada en el entrenamiento con kayak**
+
 Una aplicación web con el objetivo de almacenar y hacer seguimiento tanto de tus entrenamientos como de tus ejercicios. Este modelo de negocio ya existe, pero se encuentra principalmente en aplicaciones móviles. El punto fuerte de esta propuesta sería su versatilidad, al poder utilizarse desde cualquier dispositivo con acceso a internet.
 
 La comercialización se realizaría mediante una suscripción mensual. Entre la competencia se encuentran aplicaciones móviles como Gym WP, Muscle Booster, entre otras, todas con una amplia base de usuarios y numerosas descargas en la Play Store.
@@ -49,13 +52,22 @@ Crecimiento:El sector fitnes y del rendimiento deportivo , es un mercado en auge
 
 ### 2.3- Segmento de clientes
 Esta aplicación esta destinada a usuarios de gimnasios y atletas de distintos deportes,cansados de usar libreta y boli para anotar y seguir su progreso.
+
+**TU CREES QUE ESTO ES LO QUE TIENES QUE PONER!!!**
+**HAS QUITADO MUCHAS COSAS QUE NO HE DICHO QUE NO SE HAGAN, HE DICHO QUE NO PARA AHORA**
+
+
 ## 3- Requisitos técnicos
+
+**TU CREES QUE ESTO ES SUFICIENTE?? NO TIENES BBDD NI HOSTING NI NADA DE NADA**
 
 - **Infraestructura:** dominio web, servidor web dedicado, servidor de base de datos, almacenamento, memoria, ...
 - **Backend:** PHP
 - **Frontend:** HTML5, CSS3, JavaScript.
 
 ## 4- Planificación
+
+**SE PIDE DIAGRAMA GANTT. NO ES CALCAR LO QUE YO OS PONGO DE LAS FASES DE ENTREGA, ES LO QUE CREEIS TU Y LAS FASES QUE REALMENTE APLICARÍAS**
 
 - Estudio preliminar :Un estudio y análisis sobre rl proyecto a realizar.
 - Análisis : Estudio de los requerimentos para llevar a cabo el proyecto.
