@@ -46,6 +46,7 @@ DAFO:
 |--------------|----------------------------|-------------------|
 | Negativos    | Popularidad                | Competencia       |
 | Positivos    | Versatilidad               | Crecimiento       |
+
   Popularida:A competenecia é amplia e popular neceistariase unha inversión en marketing.
   Versatilidad:Tecnoloxia escalable e compatible con multiples dispositivos.
   Competencia:Competencia xa consolidada.
@@ -125,8 +126,6 @@ Prevision de ventas primer ano:
 #### 2.8.1- Viabilidade técnica
 É un proxecto tecnivamente viable, dado que nn precisa unha compleja base de datos nin un servidor super potente.
 #### 2.8.2 - Viabilidade económica
-
-> _EXPLICACIÓN_: Neste subapartado deberás defender con datos a viabilidade da realización do proyecto, para elo debes indicar os custos e investimentos:
 INVESTIMENTOS:
   -Dominio web: 20 € anual.
   -Hosting: 200 € anual.
