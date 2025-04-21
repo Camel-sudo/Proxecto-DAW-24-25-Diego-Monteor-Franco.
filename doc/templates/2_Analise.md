@@ -8,57 +8,78 @@
   - [5- Normativa](#5--normativa)
   - [6- Melloras futuras](#6--melloras-futuras)
 
-> *EXPLICACION*: Este documento describe os requirimentos para "nome do proxecto" especificando que funcionalidade ofrecerá e de que xeito.
 
 ## 1- Descrición Xeral
 
->*EXPLICACION*: Descrición Xeral do proxecto
+NutriPro é unha aplicación web que permite aos usuarios facer o seguimento de distintos valores nutricionais da súa dieta.
 
 ## 2- Funcionalidades
 
->*EXPLICACION* Describir que servizos ou operacións se van poder realizar por medio do noso proxecto, indicando que actores interveñen en cada caso.
->
-> Enumeradas, de maneira que na fase de deseño poidamos definir o diagrama ou configuración correspondente a cada funcionalidade.
-> Cada función ten uns datos de entrada e uns datos de saída. Entre os datos de entrada e de saída, realízase un proceso, que debe ser explicado.
-
-Exemplo:
-
 | Acción   |  Descrición        |
 |----------|--------------------|
-| Alta de productos   | Dar de alta os productos na base de datos|
-| Modificar productos | Modificación de productos na base de datos|
-| Presentación dos productos  | Mostra dos productos por medio da páxina web |
+| Registro de Usuarios   | Dar de alta os usuarios|
+| Inicio de sesion | Paxina donde se xestiona o inicio de sesion|
+| Añadir os teus valores  | Añadir unha serie de parametros sobre o que se calculara o teu metabolismo basal,etc |
+| Gestionar macros  | Gestionar os teus porcentajes de macronutrientres e outros parametros da dieta|
+| Añadir alimento  | Añadir alimento ao día de hoxe o cal restara kcal e nutrientes do total a acadar ese día|
+| Consultar infromación alimento  | Descripcion de cada alimento con macronutrientes ,micronutrientes e kcal|
+| Eliminar alimento  | eliminar alimento ao día correspondiente o cal resetara as kcal e nutrientes totales deixando como si non se huebra consumido|
+| Crear alimento  | crear un alimento novo que non este na base de datos ou na api|
+| Dar de alta clientes nutricionista  | dar de alta e crear as contas dos clientes dos nutricionistas |
 
 ## 3- Tipos de usuarios
 
-> *EXPLICACION* Describir os tipos de usuario que poderán acceder ao noso sistema. Habitualmente os tipos de usuario veñen definidos polas funcionalidades ás cales teñen acceso. En termos xerais existen moitos grupos de usuarios: anónimos, novos, rexistrados, bloqueados, confirmados, verificados, administradores, etc.
->
-> Exemplo:
->
-> - Usuario xenérico, que terá acceso a ...
-> - Usuario técnico, que poderá...
-
+-Usuario plan base: 
+        -Acceso a todo o que conleva a monitorización da sua dieta excepto a valores especificos dos seus alimentos.
+-Usuario plan premiun:
+        -Como o plan base pero añadindo a capacidade de veer os valroes especificos dos alimentos.
+-Usuario plan nutricionsita:
+        -Dar de alta e baixa clientes.
+        -Acceder a información e aprametros do cliente e pautar opcions de dietas.
 ## 4- Contorno operacional
 
-> *EXPLICACION* Neste apartado deben describirse os recursos necesarios, dende o punto de vista do usuario, para poder operar coa aplicación web. Habitualmente consiste nun navegador web actualizado e unha conexión a internet.
-Se é necesario algún hardware ou software adicional, deberá indicarse.
+Navegador web actualizado e conexión a internet.
 
 ## 5- Normativa
+A aplicación cumpre coa Lei Orgánica 3/2018, do 5 de decembro, de Protección de Datos Persoais e garantía dos dereitos dixitais (LOPDPGDD), de ámbito estatal. Ademais, ao estar dispoñible na Unión Europea, tamén cumpre coa normativa europea, concretamente co Regulamento (UE) 2016/679 do Parlamento Europeo e do Consello, do 27 de abril de 2016 (Regulamento Xeral de Protección de Datos, ou GDPR).
 
-> *EXPLICACION* Investigarase que normativa vixente afecta ao desenvolvemento do proxecto e de que maneira. O proxecto debe adaptarse ás esixencias legais dos territorios onde vai operar.
-> 
-> Pola natureza dos sistema de información, unha lei que se vai a ter que mencionar de forma obrigatoria é la [Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDPGDD)](https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673). O ámbito da LOPDPGDD é nacional. Se a aplicación está pensada para operar a nivel europeo, tamén se debe facer referencia á [General Data Protection Regulation (GDPR)](https://eur-lex.europa.eu/eli/reg/2016/679/oj). Na documentación debe afirmarse que o proxecto cumpre coa normativa vixente.
->
-> Para cumplir a LOPDPGDD e/ou GDPR debe ter un apartado na web onde se indique quen é a persoa responsable do tratamento dos datos e para que fins se van utilizar. Habitualmente esta información estructúrase nos seguintes apartados:
->
-> - Aviso legal.
-> - Política de privacidade.
-> - Política de cookies.
->
-> É acosenllable ver [exemplos de webs](https://www.spotify.com/es/legal/privacy-policy/) que conteñan textos legais referenciando a LOPDPGDD ou GDPR.
+Aviso legal
+Esta aplicación web pertence a Diego Montero Franco.
+
+Contacto:
+Para calquera dúbida, pode poñerse en contacto a través do seguinte correo electrónico: diegomonterofranco05@gmail.com
+
+Política de privacidade
+  Que datos recollemos:
+
+    Nome e apelidos
+
+    Enderezo de correo electrónico
+
+    Información sobre o uso da app e do dispositivo
+
+    Cookies e tecnoloxías similares
+
+  Para que usamos os teus datos:
+
+    Para xestionar a túa conta e o servizo
+
+    Para contactar contigo, se é necesario
+
+    Para mellorar a aplicación e analizar o seu uso
+
+    Para cumprir coas obrigas legais
+
+Esta política está suxeita a cambios segundo as necesidades do produto.
+
+Política de cookies:
+
+  Usamos só as cookies esenciais para o funcionamento básico da aplicación.
 
 ## 6- Melloras futuras
 
-> *EXPLICACION* É posible que o noso proxecto se centre en resolver un problema concreto que se poderá ampliar no futuro con novas funcionalidades, novas interfaces, etc.
-
+Posibles ampliacions futuras :
+  -Recomendacions de comidas implementando IA.
+  -Sistema de logros.
+  -Enlace con sistemas como basculas,etc
 [**<-Anterior**](../../README.md)

@@ -64,6 +64,7 @@ NutriPro está dirixido a todo o mundo que desexa estar comprometido coa súa sa
   -Clientes de nutricionistas: Persoas que, grazas aos seus nutricionistas e á nosa aplicación, poderán escoller de forma sinxela a súa comida de cada día.
   -Usuarios individuais: Persoas que, sen necesidade dun nutricionista e grazas ás ferramentas que facilitamos, controlan a súa dieta.
 ### 2.4- Competencia
+Como competencia teria:
 MyFitnessPal:	  Interface complexa, pouca personalización
 Yazio:        	Non permite xestión de clientes por nutricionistas
 
@@ -165,15 +166,10 @@ dominioweb , servidor,
 - **Prototipo-funcional:** Figma.
 ## 4- Planificación
 
-> _EXPLICACIÓN_: Inclúe un calendario co tempo estimado a adicar a cada fase do proxecto.
->
-> O proxecto estará formado polas seguintes fases:
->
-> - Estudo preliminar
-> - Análise
-> - Deseño
-> - Codificación e probas (debe ser a fase máis longa).
->
-> Debe facerse un calendario ou un diagrama de Gantt indicando, para cada fase, a data de inicio, a súa duración e breve descrición das tarefas a realizar.
-
+| **Paso**              | **Fecha de inicio** | **Fecha de fin**   | **Duración** | **Descripción**                                                                 |
+|-----------------------|---------------------|--------------------|--------------|---------------------------------------------------------------------------------|
+| Estudo preliminar     | 01/04/2025          | 21/04/2025         | 3 semanas semanas  | Descrición do proxecto, obxectivos, viabilidade e tecnoloxías a usar. |
+| Análise     | 13/04/2025          |21/04/2025         | 1 semana  | Concretar as funcionalidades e usuarios do programa. |
+| Deseño     | 20/04/2025          | 28/04/2025         | 1 semana  | Crear o deseño da base de datos e crear un mockup en Figma da aplicación. |
+| Codificación e probas     | 2/05/2025          | 2/06/2025         |4 semanas  | Realizar toda a codificación para crear a páxina web a partir do deseño previamente creado. |
 [**<-Anterior**](../../README.md)
