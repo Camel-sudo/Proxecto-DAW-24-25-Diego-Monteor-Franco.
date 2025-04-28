@@ -15,8 +15,8 @@
 ## 2- Casos de uso
 [Casos de uso](../img/CASOS_DE_USO.PNG)
 ## 3- Diagrama de Base de Datos
-[Modelo Entidade/relación](../img/entidad_relacion.png)
-[Modelo relacional](../img/relacional.png)
+-[Modelo Entidade/relación](../img/entidad_relacion.png)
+-[Modelo relacional](../img/relacional.png)
 ## 4- Deseño de interface de usuarios
 
 [Pequeno diseño da pagina web](https://www.figma.com/design/6vtcQhjLk6SW4rdVHzbBwR/tfc?node-id=0-1&t=wcQruVxBJygAHwF2-1)
