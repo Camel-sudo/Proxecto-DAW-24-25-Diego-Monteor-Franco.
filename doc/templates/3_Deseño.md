@@ -13,10 +13,6 @@
 > *EXPLICACIÓN:* Incluír os diagramas de arquitectura que representen de forma gráfica a aplicación, os seus compoñentes e a súa interrelación: front-end, back-end, bases de datos, nube, microservizos, etc.
 
 ## 2- Casos de uso
-
-> *EXPLICACIÓN:* Facer os diagramas de casos de uso que representen como as persoas usuarias interaccionan co sistema.
->
->Deben incluírse o(s) tipo(s) de usuario implicados en cada caso de uso.
 ![Casos de uso](./img/CASOS_DE_USO.png)
 ## 3- Diagrama de Base de Datos
 ![Modelo Entidade/relación](./img/entidad_relacion.png)
