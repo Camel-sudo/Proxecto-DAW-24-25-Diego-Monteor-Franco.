@@ -159,12 +159,14 @@ Segun os ingresos totais e os custos toatis ,chegamos a conclusion de que:
 
 ## 3- Requirimentos técnicos
 - **Infraestructura:** dominio web, servidor web dedicado, servidor de base de datos, almacenamento, memoria, ...
-dominioweb , servidor,
+dominioweb , servidor, **AQUÍ INDICAS LA INFRAESTRUCTURA NECESARIA PARA LA PUESTA EN PRODUCCIÓN, NO GENERALIZANDO**
 - **Backend:** PHP, MYSQL
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Funcionalidades:**Validacion de datos, Programación con AJAX, Prevención contra SQL INJECTION, contrasinais HASHEADOS, uso de APIs(tanto porpias com o externas), diseño responsive
 - **Prototipo-funcional:** Figma.
 ## 4- Planificación
+
+**ESTO TIENE QUE SER UN DIAGRAMA DE GANTT Y LA ESTIMACIÓN NO ES LA PUESTA POR MÍ ES LO QUE REALMENTE LLEVARÍA EL PROYECTO ENTERO**
 
 | **Paso**              | **Fecha de inicio** | **Fecha de fin**   | **Duración** | **Descripción**                                                                 |
 |-----------------------|---------------------|--------------------|--------------|---------------------------------------------------------------------------------|
