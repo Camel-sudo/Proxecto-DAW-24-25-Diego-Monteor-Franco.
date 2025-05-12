@@ -35,23 +35,43 @@ Tanto para deportistas como para persoas comúns, unha correcta nutrición é es
 Necesidades a cubrir
     Demanda crecente de saúde dixital
     Seguimento e monitorización alimentaria
-
 Diferenciación
+    Esta app permitenos xestionar tanto a nos mesmos como deribar a nutrición a unha persoa externa
     Personalización avanzada
     Foco en nutricionistas
 Segmento de mercado:
-  Existen multiples platformas que realizan unha labor parecida, a difrenciación entre eles e nos ,é darlle aos nutricionista a posibilidad de pautar dietas a traves da nosa app.
+  Existen multiples platformas que realizan unha labor parecida, a difrenciación entre eles e nos ,é darlle aos nutricionista a posibilidad de pautar dietas a traves da nosa app ademais de brindar a usuarios individuais a posibilidade de seguir os seus propios parametros.
+  
 DAFO:
-|              | Orixe interno              | Orixe externo     |
-|--------------|----------------------------|-------------------|
-| Negativos    | Popularidad                | Competencia       |
-| Positivos    | Versatilidad               | Crecimiento       |
+Debilidades (internas)
+  Falta de reconocimiento de marca al ser una app nueva.
 
-  Popularida:A competenecia é amplia e popular neceistariase unha inversión en marketing.
-  Versatilidad:Tecnoloxia escalable e compatible con multiples dispositivos.
-  Competencia:Competencia xa consolidada.
-  Crecimiento:Alianza con ximnasios/clinicas.
+  Recursos económicos limitados para inversión inicial y marketing.
 
+  Necesidad de formación específica para algunos nutricionistas poco digitalizados.
+
+  Fuerte dependencia inicial de la captación de usuarios profesionales (B2B).
+
+Amenazas (externas)
+  Competencia creciente de plataformas ya consolidadas (Nutrium,DietoPro).
+
+  Posible aparición de nuevas apps gratuitas o con modelo freemium.
+
+  Resistencia al cambio por parte de profesionales acostumbrados a métodos tradicionales.
+
+Fortalezas (internas)
+  Posibilidad de personalización y mejora continua basada en feedback directo de usuarios.
+
+  Bajo coste operativo inicial comparado con abrir una consulta física o franquiciar.
+
+  Escalabilidad: la app puede ampliarse fácilmente a otros profesionales de la salud (dietistas, entrenadores personales).
+
+  Ranking y sistema de logros.
+
+Oportunidades (externas)
+  Creciente demanda de soluciones digitales en el sector salud y nutrición.
+
+  Posibilidad de acuerdos con ximnasios e clubs de nutricionistas
 
 Stadisticas:
 Con estas estatísticas acredito o gran crecemento das apps de nutrición, tanto no mundo como en España:
@@ -67,7 +87,7 @@ NutriPro está dirixido a todo o mundo que desexa estar comprometido coa súa sa
 Como competencia teria:
 MyFitnessPal:	  Interface complexa, pouca personalización
 Yazio:        	Non permite xestión de clientes por nutricionistas
-
+Nutrium:        O formato de negocio é muy parecido a nutriPro
 ### 2.5- Proposta de valor
 Diferenciación fronte aos competidores
   -Facilita a monitorización de parámetros nutricionais dos clientes para os nutricionistas, permitindo un seguimento máis preciso e eficiente.
@@ -114,14 +134,14 @@ Variables:
   10 €/mes (acceso a todas as funcionalidades)
 
   Plan Nutricionistas:
-    30 €/mes (xestión de clientes)
+  30 €/mes (xestión de clientes)
 Prevision de ventas primer ano:
 |                         | Usuarios                    | Total             |
 |-------------------------|-----------------------------|-------------------|
 | Plan Básico             | 500                         | 0                 |
 | Plan Premiun            | 200                         | 2.000             |
 | Plan Nutricionistas     | 50                          | 18.000            |
-| TOTAL                   | 5250                        | 20.000            |
+| TOTAL                   | 750                        | 20.000            |
 ### 2.8- Viabilidade
 
 #### 2.8.1- Viabilidade técnica
@@ -137,25 +157,25 @@ CUSTOS FIXOS:
   -Hosting:200 € anual.
   -Luz:50 € mensual = 600 € anual .
   -Conexión a red: 40€ mensual = 480€ anual.
-  -Nómina:1200 € mensual = 14400€ anual.
+  -Nómina:1.134 € mensual en 14 pagas= 15.876€ anual.
   -Cuota autónomo:     
-    1º-2º ano: 60€/mes (720€/ano)
+    1ª ano cuota cero: 0€
+    2º ano: 60€/mes (720€/ano)
 CUSTOS VARIABLES:
   -Marketing:500 € anual.
   -Impuestos: 21%.
   -Custos sociais(eventos/formación):200€ anual.
 CUSTOS TOTALES:
-  -Fixos:16.420 € anuais
+  -Fixos:17.176 € anuais
   -Varaibles:700 € anuais
-  -Totais:17.660 € anuais
-
+  -Totais:17.876 € anuais
 
 #### 2.8.3- Conclusión
 Segun os ingresos totais e os custos toatis ,chegamos a conclusion de que:
-20.000-17.660  = 2.340 € de beneficio bruto anual
-2.340-21% IRPF= 1.848,6 € de beneficio neto anual
+20.000-17.876  = 2.124 € de beneficio bruto anual
+2.124-21% IRPF= 1.677,96 € de beneficio neto anual
 
-É viable economicamente e tecinamente.Os beneficios netos superan os costos,polo que no plazo de un ano o proyecot parece rentable
+É viable economicamente e tecinamente.Os beneficios netos superan os costos,polo que no plazo de un ano o proyecto parece rentable
 
 ## 3- Requirimentos técnicos
 - **Infraestructura:** dominio web, servidor web dedicado, servidor de base de datos, almacenamento, memoria, ...
