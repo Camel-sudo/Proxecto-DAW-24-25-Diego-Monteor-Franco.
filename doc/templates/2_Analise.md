@@ -28,7 +28,10 @@ NutriPro é unha aplicación web que permite aos usuarios facer o seguimento de 
 | Dar de alta clientes nutricionista  | dar de alta e crear as contas dos clientes dos nutricionistas |
 
 ## 3- Tipos de usuarios
-
+-Administrador:
+        -Gestiona a plataforma (usuarios,contenido,etc).
+-Usuario anonimo:
+        -Acceso ao mismo que un usuario de plan base solo que non se gardaran os seus datos na base de datos.
 -Usuario plan base: 
         -Acceso a todo o que conleva a monitorización da sua dieta excepto a valores especificos dos seus alimentos.
 -Usuario plan premiun:

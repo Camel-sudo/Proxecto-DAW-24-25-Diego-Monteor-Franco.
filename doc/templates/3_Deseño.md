@@ -10,10 +10,10 @@
 
 ## 1- Diagrama da arquitectura
 
-> *EXPLICACIÓN:* Incluír os diagramas de arquitectura que representen de forma gráfica a aplicación, os seus compoñentes e a súa interrelación: front-end, back-end, bases de datos, nube, microservizos, etc.
+-[Diagrama de Arquitectura](../img/DIAGRAMADEARQUITECTURA.png)
 
 ## 2- Casos de uso
-[Casos de uso](../img/CASOS_DE_USO.PNG)
+[Casos de uso](../img/casos.PNG)
 ## 3- Diagrama de Base de Datos
 -[Modelo Entidade/relación](../img/entidad_relacion.png)
 -[Modelo relacional](../img/relacional.png)
