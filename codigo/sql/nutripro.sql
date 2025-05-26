@@ -176,7 +176,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(50) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `contraseña_hash` varchar(255) NOT NULL,
+  `contrasena_hash` varchar(255) NOT NULL,
   `tipo_usuario` enum('base','premium','nutricionista') NOT NULL,
   `fecha_registro` datetime DEFAULT current_timestamp(),
   `altura` decimal(5,2) DEFAULT NULL COMMENT 'cm',

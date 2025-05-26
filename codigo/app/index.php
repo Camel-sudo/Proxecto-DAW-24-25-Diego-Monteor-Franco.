@@ -1,5 +1,8 @@
 <?php
-include("controllers/NutriproController.php");
+include_once("globals.php");
+include_once(CONTROLLER_PATH."NutriproController.php");
+include_once(CONTROLLER_PATH."Controller.php");
+include_once(CONTROLLER_PATH."UsuarioController.php");
 session_start();
 if (isset($_REQUEST['controller'])) {
     $controller = $_REQUEST['controller'];
