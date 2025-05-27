@@ -1,4 +1,4 @@
-<form action="index.php?controller=UsuarioController&action=LoginUsuario" method="POST">
+<form action="index.php?controller=AuthController&action=LoginUsuario" method="POST">
   <h2>Iniciar sesión</h2>
   
   <label for="email">Correo electrónico:</label><br>

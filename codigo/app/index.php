@@ -5,7 +5,7 @@ include_once(CONTROLLER_PATH."NutriproController.php");
 include_once(CONTROLLER_PATH."Controller.php");
 include_once(CONTROLLER_PATH."UsuarioController.php");
 include_once(CONTROLLER_PATH."AuthController.php");
-//POSIBLE IMPLANTACION DE WHITELIST
+//POSIBLE IMPLANTACION FUTURA DE WHITELIST
 if (isset($_REQUEST['controller'])) {
     $controller = $_REQUEST['controller'];
     try {
@@ -14,7 +14,10 @@ if (isset($_REQUEST['controller'])) {
         if (isset($_REQUEST['action'])) {
             $action = $_REQUEST['action'];
         }
-        $objeto->$action();
+        if (AuthModel::tienePermiso($controller, $action)) {
+            $objeto->$action();
+            exit;
+        }
     } catch (\Throwable $th) {
         echo("hola");
         error_log("Cargando controlador inexistente: " . $controller);

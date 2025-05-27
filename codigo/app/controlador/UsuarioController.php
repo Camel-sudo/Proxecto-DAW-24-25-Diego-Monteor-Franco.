@@ -56,19 +56,4 @@ class UsuarioController extends Controller
             }    
         }        
     public function bajaUsuario(){}
-    public function cargarMenu(){
-        <?php if (!AuthModel::usuarioLogueado()): ?>
-            <a href="index.php?controller=Auth&action=LoginForm">Login</a>
-        <?php else: ?>
-            <span>Hola, <?= AuthModel::usuarioNombre() ?></span>
-            <a href="index.php?controller=AuthController&action=logout">Cerrar sesión</a>
-            <?php if (AuthModel::rol() === 'admin'): ?>
-                <a href="#">Panel Admin</a>
-            <?php elseif (AuthModel::rol() === 'nutricionista'): ?>
-                <a href="#">Mis pacientes</a>
-            <?php elseif (AuthModel::rol() === 'usuario'): ?>
-                <a href="#">Mis dietas</a>
-            <?php endif; ?>
-        <?php endif; ?>
-    }
 }

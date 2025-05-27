@@ -1,5 +1,6 @@
 <?php
 include_once("Controller.php");
+include_once(MODEL_PATH . "AuthModel.php");
 include_once(MODEL_PATH . "UsuarioModel.php");
 class AuthController extends Controller{
     public function __construct()

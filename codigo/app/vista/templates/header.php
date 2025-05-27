@@ -11,13 +11,8 @@
     <header>
     <h1>Nutripro</h1>
     <nav>
-      <a href="index.php?controller=AuthController&action=LoginForm">Login</a>
-      <a href="index.php?controller=UsuarioController&action=RegistroForm">Registrarse</a>
-      <a href="index.php?controller=UsuarioController&action=EditAccountForm">Edit</a>
-    </nav>
-    <nav>
       <?php
-        
+        echo(AuthModel::cargarMenu());
       ?>
     </nav>
 
