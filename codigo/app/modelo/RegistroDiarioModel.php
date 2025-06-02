@@ -20,7 +20,7 @@ class RegistroDiario
     public $grasas_consumidas;
     public $cliente;
     public $nutricionista;
-    public $alimentos = []; // Array de RegistroAlimentos
+    public $alimentos = []; 
 
     public function __construct($id_registro, $id_cliente, $id_nutricionista, $fecha, $tipo, $calorias_objetivo, $proteinas_objetivo, $carbohidratos_objetivo, $grasas_objetivo, $calorias_consumidas, $proteinas_consumidas, $carbohidratos_consumidas, $grasas_consumidas)
     {
@@ -42,13 +42,59 @@ class RegistroDiario
 
 class RegistroDiarioModel
 {
-    public static function crear_registro_diario($id_cliente, $fecha, $tipo, $id_nutricionista = null)
-    {
-    }
+    public static function crear_registro_diario($id_cliente, $fecha, $tipo = 'almuerzo', $id_nutricionista = null)
+{
+    $db = ConnectionDB::get();
+    //no funciona
+    try {
+        $query = $db->prepare("SELECT id_registro FROM registro_diario WHERE id_cliente = ? AND fecha = ? AND tipo = ?");
+        $query->execute([$id_cliente, $fecha, $tipo]);
 
-    public static function agregar_alimento_registro($id_registro, $id_alimento, $descripcion, $momento_dia, $cantidad, $unidad, $calorias, $proteinas, $carbohidratos, $grasas, $es_recomendacion = false, $consumido = true)
-    {
+        $registro = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($registro) {
+            return $registro['id_registro'];
+        }
+        $query = $db->prepare("
+            INSERT INTO registro_diario (
+                id_cliente, id_nutricionista, fecha, tipo,
+                calorias_objetivo, proteinas_objetivo, carbohidratos_objetivo, grasas_objetivo,
+                calorias_consumidas, proteinas_consumidas, carbohidratos_consumidas, grasas_consumidas
+            ) VALUES (?, null, ?, ?, 0, 0, 0, 0, 0, 0, 0, 0)
+        ");
+        $query->execute([$id_cliente, $fecha, $tipo]);
+
+        return $db->lastInsertId();
+    } catch (PDOException $e) {
+        error_log("Error al crear registro diario: " . $e->getMessage());
+        throw new Exception("Error al crear registro diario: " . $e->getMessage());
     }
+}
+
+
+
+public static function agregar_alimento_registro(
+    $id_alimento, $descripcion, $momento_dia,
+    $cantidad, $unidad, $calorias, $proteinas, $carbohidratos, $grasas,
+    $es_recomendacion = false, $consumido = true
+) {
+    $db = ConnectionDB::get();
+
+    $query = $db->prepare("
+        INSERT INTO registro_alimento (
+             id_alimento, descripcion, momento_dia, cantidad, unidad,
+            calorias, proteinas, carbohidratos, grasas, es_recomendacion, consumido
+        ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    return $query->execute([
+        $id_alimento, $descripcion, $momento_dia, $cantidad, $unidad,
+        $calorias, $proteinas, $carbohidratos, $grasas,
+        $es_recomendacion ? 1 : 0,
+        $consumido ? 1 : 0
+    ]);
+}
+
 
     public static function get_registro_diario($id_cliente, $fecha, $tipo)
     {

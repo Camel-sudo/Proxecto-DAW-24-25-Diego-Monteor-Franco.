@@ -5,6 +5,8 @@ include_once(CONTROLLER_PATH."NutriproController.php");
 include_once(CONTROLLER_PATH."Controller.php");
 include_once(CONTROLLER_PATH."UsuarioController.php");
 include_once(CONTROLLER_PATH."AuthController.php");
+include_once(CONTROLLER_PATH."MacrosController.php");
+include_once(CONTROLLER_PATH."AlimentoController.php");
 //POSIBLE IMPLANTACION FUTURA DE WHITELIST
 if (isset($_REQUEST['controller'])) {
     $controller = $_REQUEST['controller'];

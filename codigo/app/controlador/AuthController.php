@@ -25,6 +25,13 @@ class AuthController extends Controller{
                 $_SESSION['usuario_id'] = $usuario->id_usuario;
                 $_SESSION['usuario_nombre'] = $usuario->nombre;
                 $_SESSION['usuario_rol'] = $usuario->tipo_usuario;
+                //logica para la administración de dietas, en caso de ser un usuario no nutricionista
+                //puede adminsitrarse el los alimentos que le aparecen en las dietas,pero solo su dieta, sin embargo si es un nutricionista el valor
+                // "cliente_id" sera asignado tras la eleccion del cliente que modificara.
+                if ( $usuario->tipo_usuario !== 'nutricionista') {
+                    $id_cliente=ClienteModel::get_cliente_by_usuario($usuario->id_usuario);
+                    $_SESSION['id_cliente'] =$id_cliente->id_cliente;
+                }
                 echo json_encode(['success' => true, 'message' => 'Login correcto']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Usuario o contraseña incorrectos']);

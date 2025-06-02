@@ -1,36 +1,32 @@
 <?php
-include_once 'UsuarioModel.php';
-include_once 'ConectionDb.php';
-class Cliente extends Usuario
+include_once(MODEL_PATH . "UsuarioModel.php");
+class ClienteModel
 {
+    public static function guardar_cliente($id_usuario)
+    {
+        $db = ConnectionDB::get();
 
-    public $idNutricionista;
-    public function __construct($id_usuario, $nombre, $apellidos, $email, $contraseña_hash, $tipo_usuario, $fecha_registro, $altura, $peso, $edad, $sexo, $actividad_fisica, $objetivo, $metabolismo_basal, $idNutricionista)
-    {
-        parent::__construct($id_usuario, $nombre, $apellidos, $email, $contraseña_hash, $tipo_usuario, $fecha_registro, $altura, $peso, $edad, $sexo, $actividad_fisica, $objetivo, $metabolismo_basal);
-        $this->idNutricionista = $idNutricionista;
-    }
-    /**
-     * Get the value of idNutricionista
-     */
-    public function getIdNutricionista()
-    {
-        return $this->idNutricionista;
+        $sql = "INSERT INTO cliente (id_usuario, id_nutricionista) VALUES (?, NULL)";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute([$id_usuario]);
     }
 
-    /**
-     * Set the value of idNutricionista
-     *
-     * @return  self
-     */
-    public function setIdNutricionista($idNutricionista)
+    public static function añadir_cliente_a_nutricionista($id_cliente, $id_nutricionista)
     {
-        $this->idNutricionista = $idNutricionista;
+        $db = ConnectionDB::get();
 
-        return $this;
+        $sql = "UPDATE cliente SET id_nutricionista = ? WHERE id_cliente = ?";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute([$id_nutricionista, $id_cliente]);
     }
-}
 
-class ClienteModel 
-{
+    public static function get_cliente_by_usuario($id_usuario)
+    {
+        $db = ConnectionDB::get();
+
+        $sql = "SELECT * FROM cliente WHERE id_usuario = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id_usuario]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }

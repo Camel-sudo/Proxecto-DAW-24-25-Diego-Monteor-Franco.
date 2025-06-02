@@ -104,7 +104,11 @@ class UsuarioModel
     $stmt->bindParam(':tipo_usuario', $usuario->tipo_usuario, PDO::PARAM_STR);
     $stmt->bindParam(':fecha_registro', $usuario->fecha_registro, PDO::PARAM_STR);
     try {
-        $stmt->execute();
+        
+        if ($stmt->execute()) {
+            $id_usuario = $db->lastInsertId();
+            ClienteModel::guardar_cliente($id_usuario);
+        }
         return true;
     } catch (PDOException $th) {
         error_log("Error subiendo usuario: " . $th->getMessage());

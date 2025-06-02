@@ -47,7 +47,7 @@ class UsuarioController extends Controller
             );
 
             if (UsuarioModel::alta_usuario($usuario)) {
-                header('Location: index.php?controller=UsuarioController&action=LoginForm');
+                header('Location: index.php?controller=AuthController&action=LoginForm');
                 exit;
             } else {
                 echo "Error al registrar el usuario.";

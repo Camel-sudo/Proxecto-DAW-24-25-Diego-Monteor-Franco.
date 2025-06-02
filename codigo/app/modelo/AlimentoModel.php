@@ -16,7 +16,7 @@ class Alimento
     public $sodio;
     public $ultima_actualizacion;
 
-    public function __construct($id_alimento, $calorieking_id, $nombre, $marca, $porcion_estandar, $calorias, $proteinas, $carbohidratos, $grasas, $fibra, $sodio, $ultima_actualizacion)
+    public function __construct($id_alimento, $calorieking_id=null, $nombre=null, $marca=null, $porcion_estandar=null, $calorias=null, $proteinas=null, $carbohidratos=null, $grasas=null, $fibra=null, $sodio, $ultima_actualizacion)
     {
         $this->id_alimento = $id_alimento;
         $this->calorieking_id = $calorieking_id;
@@ -257,11 +257,128 @@ class Alimento
 
 class AlimentoModel
 {
-    public static function buscar_alimento($nombre)
-    {
+    public static function buscar_alimento($query)
+{
+    ob_clean();
+    header('Content-Type: application/json');
+
+    if (empty($query)) {
+        echo json_encode(['error' => 'No se proporcionó una consulta de búsqueda.']);
+        exit;
     }
 
-    public static function get_alimento_by_id($id_alimento)
-    {
+    $api_url = 'https://world.openfoodfacts.org/cgi/search.pl?' . http_build_query([
+        'search_terms' => $query,
+        'search_simple' => 1,
+        'action' => 'process',
+        'json' => 1,
+        'fields' => 'product_name,nutriments,code',
+        'page_size' => 3
+    ]);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60); // ⏱️ Límite de tiempo
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo json_encode(['error' => 'Error al conectar con la API: ' . curl_error($ch)]);
+        curl_close($ch);
+        exit;
     }
+
+    curl_close($ch);
+    
+    $data = json_decode($response, true);
+
+    if (!isset($data['products'])) {
+        echo json_encode(['error' => 'No se encontraron productos.']);
+        exit;
+    }
+
+    $productos = [];
+
+    foreach ($data['products'] as $producto) {
+        $productos[] = [
+            'descripcion' => $producto['product_name'] ?? 'Sin nombre',
+            'calorias' => $producto['nutriments']['energy-kcal_100g'] ?? null,
+            'proteinas' => $producto['nutriments']['proteins_100g'] ?? null,
+            'carbohidratos' => $producto['nutriments']['carbohydrates_100g'] ?? null,
+            'grasas' => $producto['nutriments']['fat_100g'] ?? null,
+            'codigo' => $producto['code'] ?? null
+        ];
+    }
+
+    echo json_encode($productos);
+    exit();
+}
+public static function guardar(Alimento $alimento)
+{
+    $db = ConnectionDB::get(); // Asegúrate de que tienes una clase de conexión
+
+    // Comprobamos si ya existe un alimento con el mismo nombre y marca (opcional)
+    $queryCheck = $db->prepare("SELECT id_alimento FROM alimento WHERE nombre = ? AND marca = ?");
+    $queryCheck->execute([$alimento->nombre, $alimento->marca]);
+    $existing = $queryCheck->fetch(PDO::FETCH_ASSOC);
+
+    if ($existing) {
+        // Ya existe, devolvemos su ID
+        return $existing['id_alimento'];
+    }
+
+    // Insertamos un nuevo alimento
+    $query = $db->prepare("
+        INSERT INTO alimento (
+            calorieking_id, nombre, marca, porcion_estandar, calorias,
+            proteinas, carbohidratos, grasas, fibra, sodio, ultima_actualizacion
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    $success = $query->execute([
+        $alimento->calorieking_id,
+        $alimento->nombre,
+        $alimento->marca,
+        $alimento->porcion_estandar,
+        $alimento->calorias,
+        $alimento->proteinas,
+        $alimento->carbohidratos,
+        $alimento->grasas,
+        $alimento->fibra,
+        $alimento->sodio,
+        $alimento->ultima_actualizacion,
+    ]);
+
+    if ($success) {
+        return $db->lastInsertId();
+    } else {
+        throw new Exception("Error al guardar el alimento.");
+    }
+}
+public static function get_alimento_by_id($id_alimento)
+{
+    $db = ConnectionDB::get();
+    $query = $db->prepare("SELECT * FROM alimento WHERE id_alimento = ?");
+    $query->execute([$id_alimento]);
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) return null;
+
+    return new Alimento(
+        $row['id_alimento'],
+        $row['calorieking_id'],
+        $row['nombre'],
+        $row['marca'],
+        $row['porcion_estandar'],
+        $row['calorias'],
+        $row['proteinas'],
+        $row['carbohidratos'],
+        $row['grasas'],
+        $row['fibra'],
+        $row['sodio'],
+        $row['ultima_actualizacion']
+    );
+}
+
 }

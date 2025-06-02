@@ -9,17 +9,21 @@ class AuthModel {
         'base' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
-            'DietaController' => ['misDietas'],
+            'MacrosController' => ['misDietas'],
+            'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
         ],
         'premium' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
-            'DietaController' => ['misDietas', ],
+            'MacrosController' => ['misDietas'],
+            'AlimentoController' => ['buscarAlimentoForm','buscar'],
         ],
         'nutricionista' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
             'ClienteController' => ['misClientes', 'verClientes'],
+            'AlimentoController' => ['buscarAlimentoForm','buscar'],
+
         ],
         'admin' => [
             '*' => ['*'], 
@@ -69,8 +73,8 @@ class AuthModel {
                 case 'nutricionista':
                     $html .= '<a href="index.php?controller=nutricionistaController&action=misPacientes">Mis pacientes</a>';
                     break;
-                case 'usuario':
-                    $html .= '<a href="index.php?controller=macrosController&action=misDietas">Mis dietas</a>';
+                case 'base':
+                    $html .= '<a href="index.php?controller=MacrosController&action=misDietas">Mis dietas</a>';
                     break;
             }
         }
