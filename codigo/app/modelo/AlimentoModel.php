@@ -316,9 +316,9 @@ class AlimentoModel
 }
 public static function guardar(Alimento $alimento)
 {
-    $db = ConnectionDB::get(); // Asegúrate de que tienes una clase de conexión
+    $db = ConnectionDB::get();
 
-    // Comprobamos si ya existe un alimento con el mismo nombre y marca (opcional)
+    // Comprobamos si ya existe un alimento con el mismo nombre y marca
     $queryCheck = $db->prepare("SELECT id_alimento FROM alimento WHERE nombre = ? AND marca = ?");
     $queryCheck->execute([$alimento->nombre, $alimento->marca]);
     $existing = $queryCheck->fetch(PDO::FETCH_ASSOC);

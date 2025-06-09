@@ -11,29 +11,22 @@
 
 ### 1.1- Instalación
 
-> *EXPLICACIÓN:* Neste apartado describiranse todos os pasos necesarios para que calquera persoa poida descargar o código do proxecto e continuar o seu desenvolvemento.
->
-> Como:
-> 
-> - Requirimentos de hardware, servidores na nube, etc.
-> - Software necesario: servidores (Exemplo servidor Web), software externo co que interaciona a nosa aplicación, contenedores, etc.
-> - Carga inicial de datos na base de datos. Migración de datos xa existentes noutros formatos.
-> - Usuarios da aplicación.
-> - Diagrama final de despregue (se hai variacións con respecto ó realizado na anterior fase).
+## Requirimentos de Software
+
+É necesario ter instalada unha versión mínima de **Docker 20.10.24**.
+
+## Instrucións de Instalación
+
+1. Descargar a carpeta [app](/codigo/app/).
+2. Configurar a base de datos: importar o ficheiro SQL facilitado en [sql](/codigo/sql/nutripro.sql).
+3. Iniciar a aplicación co seguinte comando:
+
+   ```bash
+   sudo docker-compose up
 
 ### 1.2- Administración do sistema
 
-> *EXPLICACIÓN:* Neste apartado indicarase información relativa á administración do sistema, é dicir, tarefas que se deberán realizar unha vez que o sistema estea funcionando.
->
-> Como:
-> 
-> - Copias de seguridade do sistema.
-> - Copias de seguridade da base de datos.
-> - Xestión de usuarios.
-> - Xestión seguridade.
-> - Xestión de incidencias, que poden ser de dous tipos: de sistema (accesos non autorizados á BD, etc) ou de fallos no software.
->
-> No caso de que sexan precisas.
+Será preciso crear copias periódicas da base de datos, dado que manexamos información importante sobre o traballo doutras persoas. A perda da base de datos podería implicar a perda do traballo realizado ata o momento polos nosos clientes.
 
 ## 2- Manual de usuario
 
