@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('input-busqueda');
   const resultadosDiv = document.getElementById('resultados');
 
-  // BÚSQUEDA 
+  // BÚSQUEDA
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = input.value.trim();
@@ -45,11 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           data.forEach((item) => {
             resultadosDiv.innerHTML += `
-              <div class="alimento"> 
+              <div class="alimento">
                 <strong>${item.descripcion}</strong><br>
                 Calorías: ${item.calorias ?? 'N/A'}, Proteínas: ${item.proteinas ?? 'N/A'}, Carbs: ${item.carbohidratos ?? 'N/A'}, Grasas: ${item.grasas ?? 'N/A'}
                 <form class="form-seleccion" data-action="index.php?controller=AlimentoController&action=guardarSeleccion">
-                  <input type="hidden" name="idAlimento" value="${item.id_alimento}">  
+                  <input type="hidden" name="fecha" value="${document.querySelector('input[name="fecha"]').value}">
+                  <input type="hidden" name="momento_dia" value="${document.querySelector('input[name="momento_dia"]').value}">
+                  <input type="hidden" name="idAlimento" value="${item.id_alimento}">
                   <label for="cantidad">Cantidad (g):</label>
                   <input type="number" name="cantidad" min="1" required>
                   <button type="submit">Seleccionar</button>
@@ -71,40 +73,44 @@ document.addEventListener('DOMContentLoaded', () => {
   resultadosDiv.addEventListener('submit', (e) => {
     if (e.target.matches('.form-seleccion')) {
       e.preventDefault();
-  
+
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData.entries());
-  
+
       const alimentoDiv = e.target.closest('.alimento');
       const nombre = alimentoDiv.querySelector('strong')?.textContent ?? '';
       const texto = alimentoDiv.textContent;
-  
+
       const calorias = parseFloat(texto.match(/Calorías: (\d+\.?\d*)/)?.[1] ?? 0);
       const proteinas = parseFloat(texto.match(/Proteínas: (\d+\.?\d*)/)?.[1] ?? 0);
       const carbohidratos = parseFloat(texto.match(/Carbs: (\d+\.?\d*)/)?.[1] ?? 0);
       const grasas = parseFloat(texto.match(/Grasas: (\d+\.?\d*)/)?.[1] ?? 0);
-  
+
       const alimento = {
         id_alimento: data.idAlimento,
         nombre: nombre,
         marca: null,
         calorieking_id: null,
         porcion_estandar: 100,
-        calorias: calorias,
-        proteinas: proteinas,
-        carbohidratos: carbohidratos,
-        grasas: grasas,
+        calorias,
+        proteinas,
+        carbohidratos,
+        grasas,
         fibra: 0,
         sodio: 0,
         ultima_actualizacion: new Date().toISOString().split('T')[0]
       };
-  
+
       const payload = {
         idAlimento: data.idAlimento,
         cantidad: data.cantidad,
+        fecha: data.fecha,
+        momento_dia: data.momento_dia,
         alimento: alimento
       };
-  
+
+      console.log("Payload a enviar: ", payload);
+
       ajax({
         url: e.target.getAttribute('data-action'),
         method: 'POST',
@@ -123,6 +129,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
-  
-  
 });

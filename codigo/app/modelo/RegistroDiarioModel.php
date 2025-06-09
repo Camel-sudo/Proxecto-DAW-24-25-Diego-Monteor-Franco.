@@ -74,29 +74,64 @@ class RegistroDiarioModel
 
 
 public static function agregar_alimento_registro(
-    $id_alimento, $descripcion, $momento_dia,
+    $id_registro, $id_alimento, $descripcion, $momento_dia,
     $cantidad, $unidad, $calorias, $proteinas, $carbohidratos, $grasas,
     $es_recomendacion = false, $consumido = true
 ) {
     $db = ConnectionDB::get();
 
     $query = $db->prepare("
-        INSERT INTO registro_alimento (
-             id_alimento, descripcion, momento_dia, cantidad, unidad,
-            calorias, proteinas, carbohidratos, grasas, es_recomendacion, consumido
-        ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO `registro_alimento` (
+            `id_registro`, `id_alimento`, `descripcion`, `momento_dia`,
+            `cantidad`, `unidad`, `calorias`, `proteinas`, `carbohidratos`, `grasas`,
+            `es_recomendacion`, `consumido`
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     return $query->execute([
-        $id_alimento, $descripcion, $momento_dia, $cantidad, $unidad,
-        $calorias, $proteinas, $carbohidratos, $grasas,
+        $id_registro, $id_alimento, $descripcion, $momento_dia,
+        $cantidad, $unidad, $calorias, $proteinas, $carbohidratos, $grasas,
         $es_recomendacion ? 1 : 0,
         $consumido ? 1 : 0
     ]);
 }
 
 
-    public static function get_registro_diario($id_cliente, $fecha, $tipo)
-    {
+public static function obtener_registros_con_alimentos($id_cliente, $fecha = null)
+{
+    $db = ConnectionDB::get();
+
+    $sql = "
+        SELECT 
+            rd.fecha,
+            rd.tipo AS momento_dia,
+            ra.descripcion,
+            ra.cantidad,
+            ra.unidad,
+            ra.calorias,
+            ra.proteinas,
+            ra.carbohidratos,
+            ra.grasas,
+            ra.consumido
+        FROM registro_diario rd
+        JOIN registro_alimento ra ON rd.id_registro = ra.id_registro
+        WHERE rd.id_cliente = ?
+    ";
+
+    $params = [$id_cliente];
+
+    if ($fecha) {
+        $sql .= " AND rd.fecha = ?";
+        $params[] = $fecha;
     }
+
+    $sql .= " ORDER BY rd.fecha DESC, rd.tipo ASC";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 }

@@ -5,7 +5,7 @@ include_once(CONTROLLER_PATH."NutriproController.php");
 include_once(CONTROLLER_PATH."Controller.php");
 include_once(CONTROLLER_PATH."UsuarioController.php");
 include_once(CONTROLLER_PATH."AuthController.php");
-include_once(CONTROLLER_PATH."MacrosController.php");
+include_once(CONTROLLER_PATH."RegistroDiarioController.php");
 include_once(CONTROLLER_PATH."AlimentoController.php");
 //POSIBLE IMPLANTACION FUTURA DE WHITELIST
 if (isset($_REQUEST['controller'])) {
@@ -19,6 +19,8 @@ if (isset($_REQUEST['controller'])) {
         if (AuthModel::tienePermiso($controller, $action)) {
             $objeto->$action();
             exit;
+        }else{
+            error_log("No tienes permisos para: " .$controller.":". $action);
         }
     } catch (\Throwable $th) {
         echo("hola");

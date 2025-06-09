@@ -9,9 +9,16 @@ class AlimentoController extends Controller
     {
         parent::__construct();  
     }
-    public function buscarAlimentoForm(){
-        $this->vista->show("buscar-alimento");
+    public function buscarAlimentoForm() {
+        $fecha = $_GET['fecha'] ?? date('Y-m-d');
+        $momento = $_GET['momento'] ?? 'almuerzo';
+    
+        $this->vista->show("buscar-alimento", [
+            "fecha" => $fecha,
+            "momento" => $momento
+        ]);
     }
+    
     public function buscar(){
         $query = $_GET['q'] ?? '';
         var_dump (AlimentoModel::buscar_alimento($query)); 
@@ -43,6 +50,8 @@ class AlimentoController extends Controller
             $alimentoData = $input['alimento'] ?? null;
 
 if (!$alimento && $alimentoData) {
+    $fecha = $input['fecha'] ?? date('Y-m-d');
+    $momento_dia = $input['momento_dia'] ?? 'almuerzo';
     $idAlimento = $alimentoData['id_alimento'] ?? null;
     $nombre = $alimentoData['nombre'] ?? null;
     $marca = $alimentoData['marca'] ?? null;
@@ -80,12 +89,11 @@ if (!$alimento && $alimentoData) {
         $tipo = 'completo';
         //  echo json_encode(['success' => false, 'error' => $id_cliente]);
         $id_registro = RegistroDiarioModel::crear_registro_diario($id_cliente, $fecha);
-        //modificar agregar alimento
         RegistroDiarioModel::agregar_alimento_registro(
-        
-            $idAlimento,
+            $id_registro,
+            $alimento->id_alimento,
             $alimento->nombre,
-            'almuerzo',
+            $momento_dia,
             $cantidad,
             'g',
             ($alimento->calorias * $cantidad) / 100,
@@ -93,6 +101,7 @@ if (!$alimento && $alimentoData) {
             ($alimento->carbohidratos * $cantidad) / 100,
             ($alimento->grasas * $cantidad) / 100
         );
+        
 
         echo json_encode(['success' => true]);
     } catch (Exception $e) {

@@ -9,8 +9,8 @@ class AuthModel {
         'base' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
-            'MacrosController' => ['misDietas'],
             'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
+            'RegistroDiarioController' => ['misDietas','ajaxMisDietas'],
         ],
         'premium' => [
             'AuthController' => ['logout'],
@@ -74,7 +74,7 @@ class AuthModel {
                     $html .= '<a href="index.php?controller=nutricionistaController&action=misPacientes">Mis pacientes</a>';
                     break;
                 case 'base':
-                    $html .= '<a href="index.php?controller=MacrosController&action=misDietas">Mis dietas</a>';
+                    $html .= '<a href="index.php?controller=RegistroDiarioController&action=misDietas">Mis dietas</a>';
                     break;
             }
         }

@@ -1,52 +1,81 @@
 <div class="grid">
     <div class="card">
-        <h2>Desayuno</h2>
-        <a href="http://localhost/index.php?controller=AlimentoController&action=buscarAlimentoForm">Añade alimento</a>
-        <ul>
-            <li>Avena (100g) - 389 kcal</li>
-            <li>Plátano (1 ud) - 105 kcal</li>
-        </ul>
-        <div class="totales">
-            <div class="macro">Proteínas: <span>10g</span></div>
-            <div class="macro">Carbohidratos: <span>55g</span></div>
-            <div class="macro">Grasas: <span>8g</span></div>
-        </div>
-    </div>
+        <h2>Mis Dietas</h2>
 
-    <div class="card">
-        <h2>Comida</h2>
-        <ul>
-            <li>Pechuga de pollo (150g) - 330 kcal</li>
-            <li>Arroz integral (100g) - 111 kcal</li>
-        </ul>
-        <div class="totales">
-            <div class="macro">Proteínas: <span>35g</span></div>
-            <div class="macro">Carbohidratos: <span>45g</span></div>
-            <div class="macro">Grasas: <span>9g</span></div>
-        </div>
-    </div>
+        <!-- Formulario para seleccionar fecha -->
+        <form id="form-fecha" style="margin-bottom: 20px;">
+            <label for="fecha">Selecciona una fecha:</label>
+            <input type="date" id="fecha" name="fecha" value="<?= date('Y-m-d') ?>">
+            <button type="submit">Ver</button>
+        </form>
 
-    <div class="card">
-        <h2>Merienda</h2>
-        <ul>
-            <li>Yogur griego (1 ud) - 120 kcal</li>
-        </ul>
-        <div class="totales">
-            <div class="macro">Proteínas: <span>8g</span></div>
-            <div class="macro">Carbohidratos: <span>10g</span></div>
-            <div class="macro">Grasas: <span>5g</span></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>Cena</h2>
-        <ul>
-            <li>Ensalada con atún - 250 kcal</li>
-        </ul>
-        <div class="totales">
-            <div class="macro">Proteínas: <span>20g</span></div>
-            <div class="macro">Carbohidratos: <span>15g</span></div>
-            <div class="macro">Grasas: <span>12g</span></div>
+        <!-- Contenedor donde se cargará el contenido con AJAX -->
+        <div id="contenedor-dietas">
+            <p>Cargando...</p>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("form-fecha");
+    const contenedor = document.getElementById("contenedor-dietas");
+
+    function cargarDietas(fecha) {
+        fetch("index.php?controller=RegistroDiarioController&action=ajaxMisDietas&fecha=" + fecha)
+            .then(response => response.json())
+            .then(data => {
+                contenedor.innerHTML = "";
+                if (!data.success) {
+                    contenedor.innerHTML = "<p>Error: " + data.error + "</p>";
+                    return;
+                }
+
+                const dietas = data.dietas;
+
+                // Agrupar por momento_dia
+                const agrupadas = {};
+                dietas.forEach(d => {
+                    if (!agrupadas[d.momento_dia]) agrupadas[d.momento_dia] = [];
+                    agrupadas[d.momento_dia].push(d);
+                });
+
+                for (const momento in agrupadas) {
+                    const grupo = agrupadas[momento];
+                    const div = document.createElement("div");
+                    div.classList.add("card");
+                    div.innerHTML = `<h3>${momento.charAt(0).toUpperCase() + momento.slice(1)}</h3>
+                                     <a href="index.php?controller=AlimentoController&action=buscarAlimentoForm">Añadir alimento</a>`;
+                    
+                    grupo.forEach(dieta => {
+                        div.innerHTML += `
+                            <div style="margin-bottom: 20px;">
+                                <strong>${dieta.fecha}</strong><br>
+                                <em>${dieta.descripcion} (${dieta.cantidad}${dieta.unidad})</em><br>
+                                Calorías: ${dieta.calorias} |
+                                Proteínas: ${dieta.proteinas} |
+                                Carbos: ${dieta.carbohidratos} |
+                                Grasas: ${dieta.grasas}<br>
+                                ${dieta.consumido ? '✅ Consumido' : '📌 Recomendación'}
+                            </div>`;
+                    });
+
+                    contenedor.appendChild(div);
+                }
+            })
+            .catch(err => {
+                contenedor.innerHTML = "<p>Error al cargar las dietas.</p>";
+                console.error(err);
+            });
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const fecha = document.getElementById("fecha").value;
+        cargarDietas(fecha);
+    });
+
+    // Cargar dietas al cargar la página
+    cargarDietas(document.getElementById("fecha").value);
+});
+</script>
