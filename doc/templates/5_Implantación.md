@@ -14,7 +14,7 @@
 ## Requirimentos de Software
 
 É necesario ter instalada unha versión mínima de **Docker 20.10.24**.
-Proporcionarase unha maquina virtual con docoker instalado no siguiente enlace:[maquina](/codigo/sql/nutripro.sql).
+Proporcionarase unha maquina virtual con docoker instalado no siguiente enlace:[maquina](https://mega.nz/file/xatVzBKL#0_WqKSp32VdnPOn3TOrxph8G9HuqbHW5pCsQ0IdqvmU).
 
 ## Instrucións de Instalación
 
@@ -35,8 +35,8 @@ Será preciso crear copias periódicas da base de datos, dado que manexamos info
 Para a proba da aplicación, xa están creados os seguintes usuarios:
 
 - **Usuario base 1:**  
-  `base2@base2.com`  
-  `base2`
+  `base@base.com`  
+  `base`
 
 - **Usuario base 2:**  
   `base3@base3.com`  
