@@ -19,9 +19,16 @@ class AlimentoController extends Controller
         ]);
     }
     
-    public function buscar(){
-        $query = $_GET['q'] ?? '';
-        var_dump (AlimentoModel::buscar_alimento($query)); 
+    public function buscar() {
+        $q = $_GET['q'] ?? '';
+        if (empty($q)) {
+            echo json_encode(['error' => 'No se proporcionó término de búsqueda']);
+            return;
+        }
+        $resultados = AlimentoModel::buscarCombinado($q);
+    
+        header('Content-Type: application/json');
+        echo json_encode($resultados);
     }
     public function guardarSeleccion()
 {
@@ -36,8 +43,8 @@ class AlimentoController extends Controller
         $idAlimento = $input['idAlimento'] ?? null;
         $cantidad = $input['cantidad'] ?? null;
 
-        if (!$idAlimento || !$cantidad) {
-            throw new Exception("Faltan parámetros.");
+        if (!$cantidad) {
+            throw new Exception("Falta la cantidad.");
         }
 
         $id_cliente = $_SESSION['id_cliente'] ?? null;
@@ -45,53 +52,63 @@ class AlimentoController extends Controller
             throw new Exception("Usuario no identificado.");
         }
 
-        $alimento = AlimentoModel::get_alimento_by_id($idAlimento);
-        if (!$alimento) {
-            $alimentoData = $input['alimento'] ?? null;
+        $fecha = $input['fecha'] ?? date('Y-m-d');
+        $momento_dia = $input['momento_dia'] ?? 'almuerzo';
 
-if (!$alimento && $alimentoData) {
-    $fecha = $input['fecha'] ?? date('Y-m-d');
-    $momento_dia = $input['momento_dia'] ?? 'almuerzo';
-    $idAlimento = $alimentoData['id_alimento'] ?? null;
-    $nombre = $alimentoData['nombre'] ?? null;
-    $marca = $alimentoData['marca'] ?? null;
-    $calorieking_id = $alimentoData['calorieking_id'] ?? null;
-    $porcion_estandar = $alimentoData['porcion_estandar'] ?? 100;
-    $calorias = $alimentoData['calorias'] ?? 0;
-    $proteinas = $alimentoData['proteinas'] ?? 0;
-    $carbohidratos = $alimentoData['carbohidratos'] ?? 0;
-    $grasas = $alimentoData['grasas'] ?? 0;
-    $fibra = $alimentoData['fibra'] ?? 0;
-    $sodio = $alimentoData['sodio'] ?? 0;
-    $ultima_actualizacion = $alimentoData['ultima_actualizacion'] ?? date('Y-m-d');
+        $alimento = null;
 
-    $alimento = new Alimento(
-        $idAlimento,
-    $calorieking_id,
-    $nombre,
-    $marca,
-    $porcion_estandar,
-    $calorias,
-    $proteinas,
-    $carbohidratos,
-    $grasas,
-    $fibra,
-    $sodio,
-    $ultima_actualizacion);
-    $idAlimento = AlimentoModel::guardar(
-        $alimento
-    );
-}
-
+        if ($idAlimento) {
+            // Si viene idAlimento, busca el alimento
+            $alimento = AlimentoModel::get_alimento_by_id($idAlimento);
         }
 
-        $fecha = date('Y-m-d');
-        $tipo = 'completo';
-        //  echo json_encode(['success' => false, 'error' => $id_cliente]);
+        if (!$alimento) {
+            // Si no existe alimento, intenta crear uno nuevo
+            $alimentoData = $input['alimento'] ?? null;
+
+            if (!$alimentoData) {
+                throw new Exception("No se proporcionó información para crear el alimento.");
+            }
+
+            $idAlimento = $alimentoData['id_alimento'] ?? null;
+            $nombre = $alimentoData['nombre'] ?? null;
+            if (!$nombre) {
+                throw new Exception("El nombre del alimento es obligatorio.");
+            }
+            $marca = $alimentoData['marca'] ?? null;
+            $calorieking_id = $alimentoData['calorieking_id'] ?? null;
+            $porcion_estandar = $alimentoData['porcion_estandar'] ?? 100;
+            $calorias = $alimentoData['calorias'] ?? 0;
+            $proteinas = $alimentoData['proteinas'] ?? 0;
+            $carbohidratos = $alimentoData['carbohidratos'] ?? 0;
+            $grasas = $alimentoData['grasas'] ?? 0;
+            $fibra = $alimentoData['fibra'] ?? 0;
+            $sodio = $alimentoData['sodio'] ?? 0;
+            $ultima_actualizacion = $alimentoData['ultima_actualizacion'] ?? date('Y-m-d');
+
+            $alimento = new Alimento(
+                $idAlimento,
+                $calorieking_id,
+                $nombre,
+                $marca,
+                $porcion_estandar,
+                $calorias,
+                $proteinas,
+                $carbohidratos,
+                $grasas,
+                $fibra,
+                $sodio,
+                $ultima_actualizacion
+            );
+
+            $idAlimento = AlimentoModel::guardar($alimento);
+        }
+
         $id_registro = RegistroDiarioModel::crear_registro_diario($id_cliente, $fecha);
+
         RegistroDiarioModel::agregar_alimento_registro(
             $id_registro,
-            $alimento->id_alimento,
+            $idAlimento,
             $alimento->nombre,
             $momento_dia,
             $cantidad,
@@ -101,7 +118,6 @@ if (!$alimento && $alimentoData) {
             ($alimento->carbohidratos * $cantidad) / 100,
             ($alimento->grasas * $cantidad) / 100
         );
-        
 
         echo json_encode(['success' => true]);
     } catch (Exception $e) {
@@ -110,6 +126,8 @@ if (!$alimento && $alimentoData) {
 
     exit;
 }
+
+    
 
 
     

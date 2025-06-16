@@ -9,3 +9,5 @@
   
   <input type="submit" value="Entrar">
 </form>
+<script src="vista/js/script.js" defer></script>
+<script src="vista/js/login.js" defer></script>

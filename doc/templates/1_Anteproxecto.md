@@ -153,6 +153,7 @@ INVESTIMENTOS:
   -Equipo de desarrollo: 500 €.
   -Marketing: 500 € redes socais + anuncios locais.
 CUSTOS FIXOS:
+  -Asesoria:300 anual.
   -Dominio:20 € anual.
   -Hosting:200 € anual.
   -Luz:50 € mensual = 600 € anual .
@@ -166,14 +167,14 @@ CUSTOS VARIABLES:
   -Impuestos: 21%.
   -Custos sociais(eventos/formación):200€ anual.
 CUSTOS TOTALES:
-  -Fixos:17.176 € anuais
+  -Fixos:17.476 € anuais
   -Varaibles:700 € anuais
-  -Totais:17.876 € anuais
+  -Totais:8.176 € anuais
 
 #### 2.8.3- Conclusión
 Segun os ingresos totais e os custos toatis ,chegamos a conclusion de que:
-20.000-17.876  = 2.124 € de beneficio bruto anual
-2.124-21% IRPF= 1.677,96 € de beneficio neto anual
+20.000-18.176  = 1.824 € de beneficio bruto anual
+1.824 -21% IRPF= 1.440,96 € de beneficio neto anual
 
 É viable economicamente e tecinamente.Os beneficios netos superan os costos,polo que no plazo de un ano o proyecto parece rentable
 
@@ -185,13 +186,5 @@ dominioweb , servidor, **AQUÍ INDICAS LA INFRAESTRUCTURA NECESARIA PARA LA PUES
 - **Funcionalidades:**Validacion de datos, Programación con AJAX, Prevención contra SQL INJECTION, contrasinais HASHEADOS, uso de APIs(tanto porpias com o externas), diseño responsive
 - **Prototipo-funcional:** Figma.
 ## 4- Planificación
-
-**ESTO TIENE QUE SER UN DIAGRAMA DE GANTT Y LA ESTIMACIÓN NO ES LA PUESTA POR MÍ ES LO QUE REALMENTE LLEVARÍA EL PROYECTO ENTERO**
-
-| **Paso**              | **Fecha de inicio** | **Fecha de fin**   | **Duración** | **Descripción**                                                                 |
-|-----------------------|---------------------|--------------------|--------------|---------------------------------------------------------------------------------|
-| Estudo preliminar     | 01/04/2025          | 21/04/2025         | 3 semanas semanas  | Descrición do proxecto, obxectivos, viabilidade e tecnoloxías a usar. |
-| Análise     | 13/04/2025          |21/04/2025         | 1 semana  | Concretar as funcionalidades e usuarios do programa. |
-| Deseño     | 20/04/2025          | 28/04/2025         | 1 semana  | Crear o deseño da base de datos e crear un mockup en Figma da aplicación. |
-| Codificación e probas     | 2/05/2025          | 2/06/2025         |4 semanas  | Realizar toda a codificación para crear a páxina web a partir do deseño previamente creado. |
+-[Diagrama de gantt](../img/gantt.png)
 [**<-Anterior**](../../README.md)

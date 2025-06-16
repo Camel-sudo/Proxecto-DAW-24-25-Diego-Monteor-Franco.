@@ -1,81 +1,106 @@
-<div class="grid">
-    <div class="card">
-        <h2>Mis Dietas</h2>
+<main>
+  <section class="grid">
+    <section class="momento">
+      <h2>Mis Dietas</h2>
 
-        <!-- Formulario para seleccionar fecha -->
-        <form id="form-fecha" style="margin-bottom: 20px;">
-            <label for="fecha">Selecciona una fecha:</label>
-            <input type="date" id="fecha" name="fecha" value="<?= date('Y-m-d') ?>">
-            <button type="submit">Ver</button>
-        </form>
+      <form id="form-fecha">
+        <label for="fecha">Selecciona una fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="<?= date('Y-m-d') ?>">
+        <button type="submit">Ver</button>
+      </form>
 
-        <!-- Contenedor donde se cargará el contenido con AJAX -->
-        <div id="contenedor-dietas">
-            <p>Cargando...</p>
-        </div>
-    </div>
-</div>
+      <section class="macros">
+        <h3>KCAL: 33 / TOTAL PROTEINA: 33 / TOTAL GRASAS: 33 / TOTAL HIDRATOS: 33</h3>
+      </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("form-fecha");
-    const contenedor = document.getElementById("contenedor-dietas");
+      <section id="contenedor-dietas">
 
-    function cargarDietas(fecha) {
-        fetch("index.php?controller=RegistroDiarioController&action=ajaxMisDietas&fecha=" + fecha)
-            .then(response => response.json())
-            .then(data => {
-                contenedor.innerHTML = "";
-                if (!data.success) {
-                    contenedor.innerHTML = "<p>Error: " + data.error + "</p>";
-                    return;
-                }
+        <section>
+          <h3>Desayuno</h3>
+          <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Alimento</th>
+                <th>Cantidad</th>
+                <th>Calorías</th>
+                <th>Proteínas</th>
+                <th>Carbohidratos</th>
+                <th>Grasas</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="alimento-desayuno">
+              <tr>
+                <td colspan="9" style="text-align: center;">
+                  <a href="index.php?controller=AlimentoController&action=buscarAlimentoForm&fecha=2025-06-14&momento=almuerzo">
+                    ➕ Añadir alimento
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-                const dietas = data.dietas;
+        <section class="momento">
+          <h3>Almuerzo</h3>
+          <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Alimento</th>
+                <th>Cantidad</th>
+                <th>Calorías</th>
+                <th>Proteínas</th>
+                <th>Carbohidratos</th>
+                <th>Grasas</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="alimento-almuerzo">
 
-                // Agrupar por momento_dia
-                const agrupadas = {};
-                dietas.forEach(d => {
-                    if (!agrupadas[d.momento_dia]) agrupadas[d.momento_dia] = [];
-                    agrupadas[d.momento_dia].push(d);
-                });
+              <tr>
+                <td colspan="9" style="text-align: center;">
+                <a href="index.php?controller=AlimentoController&action=buscarAlimentoForm&fecha=2025-06-14&momento=almuerzo">
+                    ➕ Añadir alimento
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-                for (const momento in agrupadas) {
-                    const grupo = agrupadas[momento];
-                    const div = document.createElement("div");
-                    div.classList.add("card");
-                    div.innerHTML = `<h3>${momento.charAt(0).toUpperCase() + momento.slice(1)}</h3>
-                                     <a href="index.php?controller=AlimentoController&action=buscarAlimentoForm">Añadir alimento</a>`;
-                    
-                    grupo.forEach(dieta => {
-                        div.innerHTML += `
-                            <div style="margin-bottom: 20px;">
-                                <strong>${dieta.fecha}</strong><br>
-                                <em>${dieta.descripcion} (${dieta.cantidad}${dieta.unidad})</em><br>
-                                Calorías: ${dieta.calorias} |
-                                Proteínas: ${dieta.proteinas} |
-                                Carbos: ${dieta.carbohidratos} |
-                                Grasas: ${dieta.grasas}<br>
-                                ${dieta.consumido ? '✅ Consumido' : '📌 Recomendación'}
-                            </div>`;
-                    });
+        <section class="momento">
+          <h3>Cena</h3>
+          <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Alimento</th>
+                <th>Cantidad</th>
+                <th>Calorías</th>
+                <th>Proteínas</th>
+                <th>Carbohidratos</th>
+                <th>Grasas</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="alimento-cena">
+              <tr>
+                <td colspan="9" style="text-align: center;">
+                <a href="index.php?controller=AlimentoController&action=buscarAlimentoForm&fecha=2025-06-14&momento=almuerzo">
+                    ➕ Añadir alimento
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-                    contenedor.appendChild(div);
-                }
-            })
-            .catch(err => {
-                contenedor.innerHTML = "<p>Error al cargar las dietas.</p>";
-                console.error(err);
-            });
-    }
+      </section>
+    </section>
+  </section>
+</main>
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const fecha = document.getElementById("fecha").value;
-        cargarDietas(fecha);
-    });
-
-    // Cargar dietas al cargar la página
-    cargarDietas(document.getElementById("fecha").value);
-});
-</script>
+<script src="vista/js/script.js" defer></script>
+<script src="vista/js/misDietas.js" defer></script>

@@ -1,0 +1,115 @@
+
+main {
+    padding: 40px 5%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+main h2 {
+    color: var(--text-dark);
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+#form-busqueda {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#input-busqueda {
+    flex: 1;
+    min-width: 300px;
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#form-busqueda button {
+    padding: 12px 25px;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.alimento {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.3s ease;
+}
+.form-seleccion {
+    margin-top: 15px;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+.form-seleccion input[type="number"] {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.form-seleccion button {
+    padding: 8px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Vista movil */
+@media (max-width: 768px) {
+    main {
+        padding: 30px 20px;
+    }
+    
+    #form-busqueda {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #input-busqueda {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .form-seleccion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .form-seleccion input[type="number"] {
+        width: 100px;
+    }
+}

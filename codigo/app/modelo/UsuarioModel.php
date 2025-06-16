@@ -18,8 +18,22 @@ class Usuario
     public $objetivo;
     public $metabolismo_basal;
 
-    public function __construct($id_usuario, $nombre, $apellidos, $email, $contrasena_hash, $tipo_usuario=null, $fecha_registro, $altura, $peso, $edad, $sexo, $actividad_fisica, $objetivo, $metabolismo_basal=null)
-    {
+    public function __construct(
+        $id_usuario,
+        $nombre,
+        $apellidos,
+        $email,
+        $contrasena_hash,
+        $tipo_usuario = null,
+        $fecha_registro,
+        $altura,
+        $peso,
+        $edad,
+        $sexo,
+        $actividad_fisica,
+        $objetivo,
+        $metabolismo_basal = null
+    ) {
         $this->id_usuario = $id_usuario;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
@@ -35,11 +49,12 @@ class Usuario
         $this->objetivo = $objetivo;
         $this->metabolismo_basal = $metabolismo_basal;
     }
-
 }
+
 class UsuarioModel
 {
-    function calcularMetabolismoBasal($sexo, $peso, $altura, $edad) {
+    public static function calcularMetabolismoBasal($sexo, $peso, $altura, $edad)
+    {
         if ($sexo === 'masculino') {
             return 10 * $peso + 6.25 * $altura - 5 * $edad + 5;
         } elseif ($sexo === 'femenino') {
@@ -48,77 +63,71 @@ class UsuarioModel
             return 10 * $peso + 6.25 * $altura - 5 * $edad;
         }
     }
+
     public static function get_usuarios()
     {
-    //     $db = ConnectionDB::get();
-    // $sql = "SELECT `id_usuario`, `nombre`, `apellidos`, `email`, `contraseña_hash`, `tipo_usuario`, `fecha_registro`, `altura`, `peso`, `edad`, `sexo`, `actividad_fisica`, `objetivo`, `metabolismo_basal` FROM `usuario`";
-    // $stmt = $db->prepare($sql);
-    // $stmt->execute();
-    // $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // $stmt = null;
-    // $db = null;
-    // return $resultados;
     }
-    public static function getUsuarioPorEmail($email){
+
+    public static function getUsuarioPorEmail(string $email): ?Usuario
+    {
         $db = ConnectionDB::get();
-    $sql = "SELECT * FROM usuario WHERE email = :email LIMIT 1";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->execute();
+        $sql = "SELECT * FROM usuario WHERE email = :email LIMIT 1";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
 
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($row) {
-        return new Usuario(
-            $row['id_usuario'],
-            $row['nombre'],
-            $row['apellidos'],
-            $row['email'],
-            $row['contrasena_hash'],
-            $row['tipo_usuario'],
-            $row['fecha_registro'],
-            $row['altura'],
-            $row['peso'],
-            $row['edad'],
-            $row['sexo'],
-            $row['actividad_fisica'],
-            $row['objetivo'],
-            $row['metabolismo_basal']
-        );
-    } else {
-        return null;
-    }
-    }
-    // falta manejarlo con js y ajax
-    public static function alta_usuario($usuario)
-{
-    $db = ConnectionDB::get();
-    $sql = "INSERT INTO usuario 
-    (nombre, apellidos, email, contrasena_hash, tipo_usuario, fecha_registro)
-    VALUES (:nombre, :apellidos, :email, :contrasena_hash, :tipo_usuario, :fecha_registro)";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':nombre', $usuario->nombre, PDO::PARAM_STR);
-    $stmt->bindParam(':apellidos', $usuario->apellidos, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $usuario->email, PDO::PARAM_STR);
-    $stmt->bindParam(':contrasena_hash', $usuario->contrasena_hash, PDO::PARAM_STR);
-    $stmt->bindParam(':tipo_usuario', $usuario->tipo_usuario, PDO::PARAM_STR);
-    $stmt->bindParam(':fecha_registro', $usuario->fecha_registro, PDO::PARAM_STR);
-    try {
-        
-        if ($stmt->execute()) {
-            $id_usuario = $db->lastInsertId();
-            ClienteModel::guardar_cliente($id_usuario);
+        if ($row) {
+            return new Usuario(
+                $row['id_usuario'],
+                $row['nombre'],
+                $row['apellidos'],
+                $row['email'],
+                $row['contrasena_hash'],
+                $row['tipo_usuario'],
+                $row['fecha_registro'],
+                $row['altura'],
+                $row['peso'],
+                $row['edad'],
+                $row['sexo'],
+                $row['actividad_fisica'],
+                $row['objetivo'],
+                $row['metabolismo_basal']
+            );
+        } else {
+            return null;
         }
-        return true;
-    } catch (PDOException $th) {
-        error_log("Error subiendo usuario: " . $th->getMessage());
-        return false;
-    } finally {
-        $stmt = null;
-        $db = null;
     }
-}
 
+    public static function alta_usuario(Usuario $usuario): bool
+    {
+        $db = ConnectionDB::get();
+        $sql = "INSERT INTO usuario 
+            (nombre, apellidos, email, contrasena_hash, tipo_usuario, fecha_registro)
+            VALUES (:nombre, :apellidos, :email, :contrasena_hash, :tipo_usuario, :fecha_registro)";
+        $stmt = $db->prepare($sql);
 
+        $stmt->bindParam(':nombre', $usuario->nombre, PDO::PARAM_STR);
+        $stmt->bindParam(':apellidos', $usuario->apellidos, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $usuario->email, PDO::PARAM_STR);
+        $stmt->bindParam(':contrasena_hash', $usuario->contrasena_hash, PDO::PARAM_STR);
+        $stmt->bindParam(':tipo_usuario', $usuario->tipo_usuario, PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_registro', $usuario->fecha_registro, PDO::PARAM_STR);
 
+        try {
+            if ($stmt->execute()) {
+                $id_usuario = $db->lastInsertId();
+                ClienteModel::guardarCiente((int)$id_usuario);
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            error_log("Error subiendo usuario: " . $e->getMessage());
+            return false;
+        } finally {
+            $stmt = null;
+            $db = null;
+        }
+    }
 }

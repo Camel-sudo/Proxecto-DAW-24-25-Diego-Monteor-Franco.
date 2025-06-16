@@ -6,8 +6,12 @@ include_once(CONTROLLER_PATH."Controller.php");
 include_once(CONTROLLER_PATH."UsuarioController.php");
 include_once(CONTROLLER_PATH."AuthController.php");
 include_once(CONTROLLER_PATH."RegistroDiarioController.php");
+include_once(CONTROLLER_PATH."RegistroAlimentoController.php");
 include_once(CONTROLLER_PATH."AlimentoController.php");
-//POSIBLE IMPLANTACION FUTURA DE WHITELIST
+include_once(CONTROLLER_PATH."ClienteController.php");
+include_once(CONTROLLER_PATH."NutricionistaController.php");
+
+
 if (isset($_REQUEST['controller'])) {
     $controller = $_REQUEST['controller'];
     try {
@@ -23,7 +27,6 @@ if (isset($_REQUEST['controller'])) {
             error_log("No tienes permisos para: " .$controller.":". $action);
         }
     } catch (\Throwable $th) {
-        echo("hola");
         error_log("Cargando controlador inexistente: " . $controller);
         $objeto = new NutriproController();
         $objeto->landing_page();

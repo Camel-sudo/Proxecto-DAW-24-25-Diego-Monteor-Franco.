@@ -6,9 +6,11 @@
   <input type="hidden" name="momento_dia" value="<?= $_GET['momento'] ?? 'desayuno' ?>">
 
   <button type="submit">Buscar</button>
+  <button type="button" class="crear">Crear alimento</button>
 </form>
 
+<div id="resultados">
 
-<div id="resultados"></div>
-
+</div>
+<script src="vista/js/script.js" defer></script>
 <script src="vista/js/buscarAlimentos.js" defer></script>

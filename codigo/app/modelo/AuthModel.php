@@ -11,19 +11,22 @@ class AuthModel {
             'UsuarioController' => ['EditAccountForm'],
             'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
             'RegistroDiarioController' => ['misDietas','ajaxMisDietas'],
+            'RegistroAlimentoController' => ['modificar','eliminar'],
         ],
         'premium' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
             'MacrosController' => ['misDietas'],
-            'AlimentoController' => ['buscarAlimentoForm','buscar'],
+            'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
         ],
         'nutricionista' => [
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
-            'ClienteController' => ['misClientes', 'verClientes'],
-            'AlimentoController' => ['buscarAlimentoForm','buscar'],
-
+            'RegistroDiarioController' => ['misDietas','ajaxMisDietas'],
+            'ClienteController' => ['obtenerClientes', 'verClientes','altaCliente','clientesDisponibles','eliminarCliente','editarCliente','seleccionarPaciente'],
+            'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
+            'RegistroAlimentoController' => ['modificar','eliminar'],
+            'NutricionistaController' => ['misPacientes'],
         ],
         'admin' => [
             '*' => ['*'], 
@@ -64,14 +67,13 @@ class AuthModel {
             $html .= '<a href="index.php?controller=UsuarioController&action=RegistroForm">Registrarse</a>';
         } else {
             $nombre = htmlspecialchars(AuthModel::usuarioNombre());
-            $html .= "<span>Hola, $nombre</span>";
             $html .= '<a href="index.php?controller=AuthController&action=logout">Cerrar sesión</a>';
             switch (AuthModel::rol()) {
                 case 'admin':
-                    $html .= '<a href="index.php?controller=adminController&action=panel">Panel Admin</a>';
+                    $html .= '<a href="index.php?controller=AdminController&action=panel">Panel Admin</a>';
                     break;
                 case 'nutricionista':
-                    $html .= '<a href="index.php?controller=nutricionistaController&action=misPacientes">Mis pacientes</a>';
+                    $html .= '<a href="index.php?controller=NutricionistaController&action=misPacientes">Mis pacientes</a>';
                     break;
                 case 'base':
                     $html .= '<a href="index.php?controller=RegistroDiarioController&action=misDietas">Mis dietas</a>';
