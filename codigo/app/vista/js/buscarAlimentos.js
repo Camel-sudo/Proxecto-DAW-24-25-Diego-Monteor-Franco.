@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
         data: payload,
         fExito: (res) => {
           if (res.success) {
-            alert('Alimento guardado con éxito.');
+            Swal.fire('¡Guardado!', 'El alimento ha sido añadido correctamente.', 'success');
           } else {
-            alert(`Error: ${res.error}`);
+            Swal.fire('Error', data.error || 'Ocurrió un error al guardar.', 'error');
           }
         },
         fError: (err) => {
@@ -151,16 +151,17 @@ function mostrarFormularioAgregarAlimento() {
   Swal.fire({
     title: 'Añadir alimento',
     html: `
-      <input id="nombre" class="swal2-input" placeholder="Nombre">
-      <input id="porcion" class="swal2-input" placeholder="Porción estándar (g)" type="number" min="1" value="100">
-      <input id="cantidad" class="swal2-input" placeholder="Cantidad consumida (g)" type="number" min="1" value="100">
-      <input id="calorias" class="swal2-input" placeholder="Calorías" type="number" min="0" value="0">
-      <input id="proteinas" class="swal2-input" placeholder="Proteínas (g)" type="number" min="0" value="0">
-      <input id="carbohidratos" class="swal2-input" placeholder="Carbohidratos (g)" type="number" min="0" value="0">
-      <input id="grasas" class="swal2-input" placeholder="Grasas (g)" type="number" min="0" value="0">
+      <input id="nombre" class="swal2-input" placeholder="Nombre" aria-label="Nombre" type="text">
+      <input id="porcion" class="swal2-input" placeholder="Porción estándar (g)" aria-label="Porción estándar en gramos" type="number" min="1">
+      <input id="cantidad" class="swal2-input" placeholder="Cantidad consumida (g)" aria-label="Cantidad consumida en gramos" type="number" min="1">
+      <input id="calorias" class="swal2-input" placeholder="Calorías" aria-label="Calorías" type="number" min="0">
+      <input id="proteinas" class="swal2-input" placeholder="Proteínas (g)" aria-label="Proteínas en gramos" type="number" min="0">
+      <input id="carbohidratos" class="swal2-input" placeholder="Carbohidratos (g)" aria-label="Carbohidratos en gramos" type="number" min="0">
+      <input id="grasas" class="swal2-input" placeholder="Grasas (g)" aria-label="Grasas en gramos" type="number" min="0">
     `,
+
     confirmButtonText: 'Guardar',
-    focusConfirm: false,
+    focusConfirm: false,  
     preConfirm: () => {
       const nombre = document.getElementById('nombre').value.trim();
       const porcion = parseFloat(document.getElementById('porcion').value || 100);

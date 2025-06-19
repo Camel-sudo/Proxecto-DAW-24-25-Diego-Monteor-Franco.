@@ -32,7 +32,6 @@ class Alimento
         $this->ultima_actualizacion = $ultima_actualizacion;
     }
 
-    // getters y setters omitidos por brevedad (los podés agregar igual)
 }
 
 class AlimentoModel

@@ -1,6 +1,19 @@
 <?php
 class ClienteModel
 {
+    public static function asignarNutricionistaCliente($id_usuario, $id_nutricionista)
+    {
+        $conn = ConnectionDB::get();
+        
+        $stmt = $conn->prepare("
+        UPDATE cliente SET id_nutricionista = :id_nutricionista 
+        WHERE id_usuario = :id_usuario");
+        $stmt->bindParam(':id_nutricionista', $id_nutricionista);
+        $stmt->bindParam(':id_usuario', $id_usuario);
+        $stmt->execute();
+
+        return (int)$conn->lastInsertId();
+    }
     public static function altaCliente(int $id_usuario, int $id_nutricionista): int
     {
         $conn = ConnectionDB::get();
@@ -112,8 +125,8 @@ class ClienteModel
         $stmt = $conn->query("
             SELECT u.id_usuario, u.nombre, u.apellidos
             FROM usuario u
-            LEFT JOIN cliente c ON u.id_usuario = c.id_usuario
-            WHERE c.id_usuario IS NULL AND u.tipo_usuario = 'base'
+            INNER JOIN cliente c ON u.id_usuario = c.id_usuario
+            WHERE c.id_nutricionista IS NULL AND u.tipo_usuario = 'base';
         ");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

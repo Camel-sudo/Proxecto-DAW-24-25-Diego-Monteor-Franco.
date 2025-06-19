@@ -12,7 +12,10 @@ class AlimentoController extends Controller
     public function buscarAlimentoForm() {
         $fecha = $_GET['fecha'] ?? date('Y-m-d');
         $momento = $_GET['momento'] ?? 'almuerzo';
-    
+
+        $fecha = htmlspecialchars($fecha, ENT_QUOTES, 'UTF-8');
+        $momento = htmlspecialchars($momento, ENT_QUOTES, 'UTF-8');
+
         $this->vista->show("buscar-alimento", [
             "fecha" => $fecha,
             "momento" => $momento

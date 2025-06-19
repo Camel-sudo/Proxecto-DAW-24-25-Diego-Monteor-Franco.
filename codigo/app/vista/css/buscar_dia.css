@@ -186,12 +186,12 @@ table button {
 }
 
 tbody td:nth-child(7) button {
-    background: var(--accent-color);
+    background: var(--gradient);
     color: white;
 }
 
 tbody td:nth-child(8) button {
-    background: red;
+    background: #B22222;
     color: white;
 }
 section.macros{
@@ -199,7 +199,7 @@ section.macros{
     padding: 2%;
     display: flex;
     justify-content: center;
-    background-color: var(--accent-color);
+    background-color: #228B22;
 }
 button.swal2-confirm.swal2-styled{
     background-color: var(--accent-color);

@@ -32,7 +32,31 @@ class ClienteController extends Controller
 
         exit;
     }
-
+    public function altaClienteNutricionista()
+    {
+        header('Content-Type: application/json');
+    
+        try {
+            $inputJSON = file_get_contents('php://input');
+            $input = json_decode($inputJSON, true);
+    
+            $id_usuario = $input['id_usuario'] ?? null;
+            $id_nutricionista = $_SESSION['id_nutricionista'] ?? null;
+    
+            if (!$id_usuario || !$id_nutricionista) {
+                throw new Exception("Faltan parámetros.");
+            }
+    
+            $result = ClienteModel::asignarNutricionistaCliente($id_usuario, $id_nutricionista);
+    
+            echo json_encode(['success' => true, 'result' => $result]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+        }
+    
+        exit;
+    }
+    
     public function seleccionarPaciente()
 {
     header('Content-Type: application/json');

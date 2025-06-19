@@ -1,7 +1,10 @@
 <h2>Buscar Alimento</h2>
 
 <form id="form-busqueda" method="GET">
-  <input type="text" id="input-busqueda" placeholder="Buscar alimento...">
+  
+<label for="input-busqueda" class="visually-hidden">Buscar alimento</label>
+<input type="text" id="input-busqueda" name="busqueda" placeholder="Buscar alimento..." aria-label="Buscar alimento">
+
   <input type="hidden" name="fecha" value="<?= $_GET['fecha'] ?? date('Y-m-d') ?>">
   <input type="hidden" name="momento_dia" value="<?= $_GET['momento'] ?? 'desayuno' ?>">
 

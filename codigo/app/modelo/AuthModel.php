@@ -23,7 +23,7 @@ class AuthModel {
             'AuthController' => ['logout'],
             'UsuarioController' => ['EditAccountForm'],
             'RegistroDiarioController' => ['misDietas','ajaxMisDietas'],
-            'ClienteController' => ['obtenerClientes', 'verClientes','altaCliente','clientesDisponibles','eliminarCliente','editarCliente','seleccionarPaciente'],
+            'ClienteController' => ['obtenerClientes', 'verClientes','altaCliente','clientesDisponibles','eliminarCliente','editarCliente','seleccionarPaciente','altaClienteNutricionista'],
             'AlimentoController' => ['buscarAlimentoForm','buscar','guardarSeleccion'],
             'RegistroAlimentoController' => ['modificar','eliminar'],
             'NutricionistaController' => ['misPacientes'],

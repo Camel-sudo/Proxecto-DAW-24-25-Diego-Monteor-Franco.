@@ -108,7 +108,7 @@ function ajax(options) {
 
         if (id_usuario) {
           ajax({
-            url: 'index.php?controller=ClienteController&action=altaCliente',
+            url: 'index.php?controller=ClienteController&action=altaClienteNutricionista',
             method: 'POST',
             data: { id_usuario: parseInt(id_usuario) },
             fExito: result => {
@@ -222,8 +222,6 @@ function ajax(options) {
   }
 
   function seleccionarPaciente(id_cliente) {
-    console.log(id_cliente);
-    
     ajax({
       url: 'index.php?controller=ClienteController&action=seleccionarPaciente',
       method: 'POST',
