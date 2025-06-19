@@ -46,14 +46,15 @@ class ClienteModel
         return (int)$conn->lastInsertId();
     }
     public static function eliminarCliente(int $id_cliente): bool
-    {
-        $conn = ConnectionDB::get();
-        $stmt = $conn->prepare("DELETE FROM cliente WHERE id_cliente = :id_cliente");
-        $stmt->bindValue(':id_cliente', $id_cliente, PDO::PARAM_INT);
-        $stmt->execute();
+{
+    $conn = ConnectionDB::get();
+    $stmt = $conn->prepare("UPDATE cliente SET id_nutricionista = NULL WHERE id_cliente = :id_cliente");
+    $stmt->bindValue(':id_cliente', $id_cliente, PDO::PARAM_INT);
+    $stmt->execute();
 
-        return $stmt->rowCount() > 0;
-    }
+    return $stmt->rowCount() > 0;
+}
+
 
     public static function obtenerClientesPorNutricionista(int $id_nutricionista): array
     {
