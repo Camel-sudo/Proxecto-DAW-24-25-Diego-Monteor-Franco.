@@ -21,10 +21,8 @@ En desenvolvemento
 NutriPro é unha aplicación web que permite aos usuarios facer o seguimento de distintos valores nutricionais da súa dieta, facilitando o seu uso tanto para deportistas profesionais como non profesionais. Ademais, tamén permitirá aos nutricionistas pautar opcións de dieta para os seus clientes, de xeito que estes, dende a súa app, poidan elixir entre esas opcións e alcanzar os seus requirimentos nutricionais. Todo isto feito nunha base de JavaScript, PHP e MySQL.
 
 ## Instalación / Posta en marcha
-
-É necesario ter instalada unha versión mínima de **Docker 20.10.24**.  
 Proporcionarase unha máquina virtual con Docker instalado no seguinte enlace: [maquina](/codigo/sql/nutripro.sql).
-
+É necesario dispor dun servidor con algunha distribución de Linux instalada, onde estea instalada unha versión mínima de Docker 20.10.24.
 1. Descargar a carpeta [app](/codigo/app/).  
 2. Configurar a base de datos: importar o ficheiro SQL facilitado en [sql](/codigo/sql/nutripro(pruebas).sql).  
 3. Iniciar a aplicación co seguinte comando:
